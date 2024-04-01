@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "types": ["node", "express"],
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@swagger/*": ["swagger/*"],
+      "@dbConfig/*": ["dbConfig/*"],
+      "@apis/*": ["apis/*"],
+      "@exception/*": ["exception/*"],
+      "@services/*": ["services/*"],
+      "@shared/*": ["shared/*"],
+      "@guards/*": ["guards/*"],
+      "@config/*": ["config/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@constants/*": ["constants/*"]
+    },
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false
+  }
+}

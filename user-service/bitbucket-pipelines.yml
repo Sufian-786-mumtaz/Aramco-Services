@@ -1,0 +1,21 @@
+image: node:21-alpine3.18
+
+pipelines:
+  default:
+    - step:
+        name: Run Lint
+        caches:
+          - node
+        script:
+          - yarn install
+          - yarn lint
+
+  pull-requests:
+    '**':
+      - step:
+          name: Run Lint
+          caches:
+            - node
+          script:
+            - yarn install
+            - yarn lint

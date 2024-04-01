@@ -1,0 +1,57 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    runs-on: ['self-hosted']
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Build Dependencies For User Service and Build
+        run: |
+          cd /home/ubuntu/aramco/_work/aramco-services/aramco-services/user-service &&
+          yarn install &&
+          yarn build
+
+      - name: Run the User Service
+        run: pm2 restart user-service
+
+      - name: Install Build Dependencies For Department Service and Build
+        run: |
+          cd /home/ubuntu/aramco/_work/aramco-services/aramco-services/departments-service &&
+          yarn install &&
+          yarn build
+
+      - name: Run the Department Service
+        run: pm2 restart department-service
+
+      - name: Install Build Dependencies For Job Service and Build
+        run: |
+          cd /home/ubuntu/aramco/_work/aramco-services/aramco-services/jobs-service &&
+          yarn install &&
+          yarn build
+
+      - name: Run the Job Service
+        run: pm2 restart job-service
+
+      - name: Install Build Dependencies For Api Gateway and Build
+        run: |
+          cd /home/ubuntu/aramco/_work/aramco-services/aramco-services/api-gateway &&
+          yarn install &&
+          yarn build
+
+      - name: Run the Api Gateway
+        run: pm2 restart api-gateway
